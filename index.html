@@ -1,56 +1,52 @@
-<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz sobre Multimédia</title>
+    <title>Quiz com QR Code</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        .opcao { 
-            display: block; 
-            margin: 10px; 
-            padding: 10px; 
-            cursor: pointer; 
-            border: 1px solid #000; 
-            width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .opcao { display: block; margin: 10px; padding: 10px; cursor: pointer; border: 1px solid #000; }
         .correto { background-color: lightgreen; }
         .errado { background-color: lightcoral; }
-        .desativado { pointer-events: none; opacity: 0.5; }
     </style>
 </head>
 <body>
 
-    <h2>5. Como os media podem ser classificados de acordo com a sua natureza espaciotemporal?</h2>
+    <h2>Qual é a capital do Brasil?</h2>
 
     <div id="opcoes">
-        <div class="opcao" onclick="verificarResposta(this, true)">Estáticos e Dinâmicos.</div>
-        <div class="opcao" onclick="verificarResposta(this, false)">Simples e Complexos.</div>
-        <div class="opcao" onclick="verificarResposta(this, false)">Manuais e Automáticos.</div>
-        <div class="opcao" onclick="verificarResposta(this, false)">Digitais e Analógicos.</div>
+        <div class="opcao" onclick="verificarResposta(this, false)">Rio de Janeiro</div>
+        <div class="opcao" onclick="verificarResposta(this, false)">São Paulo</div>
+        <div class="opcao" onclick="verificarResposta(this, true)">Brasília</div>
+        <div class="opcao" onclick="verificarResposta(this, false)">Salvador</div>
     </div>
 
+    <h3 id="resultado"></h3>
+
+    <div id="qrcode"></div>
+
     <script>
-        let respondido = false;
-
         function verificarResposta(elemento, correta) {
-            if (respondido) return;
-            respondido = true;
-
             document.querySelectorAll('.opcao').forEach(el => {
-                el.classList.add('desativado');  // Desativa todas as opções após resposta
+                el.classList.remove('correto', 'errado');
             });
 
             if (correta) {
                 elemento.classList.add('correto');
+                document.getElementById("resultado").innerText = "Resposta correta!";
+                gerarQRCode("Parabéns! Você acertou.");
             } else {
                 elemento.classList.add('errado');
+                document.getElementById("resultado").innerText = "Resposta errada!";
+                gerarQRCode("Tente novamente!");
             }
         }
 
+        function gerarQRCode(texto) {
+            document.getElementById("qrcode").innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), texto);
+        }
     </script>
 
 </body>
