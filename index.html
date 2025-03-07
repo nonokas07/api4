@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sobre Multimédia</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .opcao { 
+            display: block; 
+            margin: 10px; 
+            padding: 10px; 
+            cursor: pointer; 
+            border: 1px solid #000; 
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .correto { background-color: lightgreen; }
+        .errado { background-color: lightcoral; }
+        .desativado { pointer-events: none; opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+    <h2>5. Como os media podem ser classificados de acordo com a sua natureza espaciotemporal?</h2>
+
+    <div id="opcoes">
+        <div class="opcao" onclick="verificarResposta(this, true)">Estáticos e Dinâmicos.</div>
+        <div class="opcao" onclick="verificarResposta(this, false)">Simples e Complexos.</div>
+        <div class="opcao" onclick="verificarResposta(this, false)">Manuais e Automáticos.</div>
+        <div class="opcao" onclick="verificarResposta(this, false)">Digitais e Analógicos.</div>
+    </div>
+
+    <script>
+        let respondido = false;
+
+        function verificarResposta(elemento, correta) {
+            if (respondido) return;
+            respondido = true;
+
+            document.querySelectorAll('.opcao').forEach(el => {
+                el.classList.add('desativado');  // Desativa todas as opções após resposta
+            });
+
+            if (correta) {
+                elemento.classList.add('correto');
+            } else {
+                elemento.classList.add('errado');
+            }
+        }
+
+    </script>
+
+</body>
+</html>
